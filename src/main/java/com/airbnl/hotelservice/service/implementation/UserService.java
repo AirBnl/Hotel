@@ -10,34 +10,33 @@ import reactor.core.publisher.Mono;
 @Service
 public class UserService implements IUserService {
 
-    private final WebClient webClient;
+    private final WebClient authWebClient;
+
     public UserService(WebClient authWebClient) {
-        this.webClient = authWebClient;
+        this.authWebClient = authWebClient;
     }
 
     @Override
     public User save(User user) {
-        User savedUser = webClient.post()
-                .uri("/user/save")
+        return authWebClient.post()
+                .uri("/user/signUp")
                 .accept(MediaType.APPLICATION_JSON)
                 .body(Mono.just(user), User.class)
                 .retrieve()
                 .bodyToMono(User.class)
                 .block();
-        return savedUser;
     }
 
     @Override
-    public User getByUserName(String username) {
-        User userFromDb = webClient.get()
+    public User getByUserName(String username, String password) {
+        return authWebClient.post()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/user")
-                        .queryParam("username", username)
+                        .path("/user/signIn")
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
+                .body(Mono.just(new User(0, username, password, "", 0)), User.class)
                 .retrieve()
                 .bodyToMono(User.class)
                 .block();
-        return userFromDb;
     }
 }

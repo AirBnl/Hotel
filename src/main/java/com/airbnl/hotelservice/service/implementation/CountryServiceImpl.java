@@ -11,16 +11,16 @@ import java.util.List;
 
 @Service
 public class CountryServiceImpl implements ICountryService {
-    private final WebClient webClient;
+    private final WebClient databaseWebClient;
 
-    public CountryServiceImpl(WebClient webClient) {
-        this.webClient = webClient;
+    public CountryServiceImpl(WebClient databaseWebClient) {
+        this.databaseWebClient = databaseWebClient;
     }
 
     @Override
     public List<Country> getAllCountries() {
 
-        return webClient.get()
+        return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/country/getAllCountries")
                         .build())

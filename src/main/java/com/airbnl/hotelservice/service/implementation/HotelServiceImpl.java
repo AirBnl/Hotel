@@ -13,15 +13,15 @@ import java.util.List;
 @Service
 public class HotelServiceImpl implements IHotelService {
 
-    private final WebClient webClient;
+    private final WebClient databaseWebClient;
 
     public HotelServiceImpl(WebClient databaseWebClient) {
-        this.webClient = databaseWebClient;
+        this.databaseWebClient = databaseWebClient;
     }
 
     @Override
     public List<Hotel> getAllHotels() {
-        return webClient.get()
+        return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/hotel/getAllHotels")
                         .build())
@@ -38,7 +38,7 @@ public class HotelServiceImpl implements IHotelService {
     }
 
     private List<Hotel> getHotels(Country country) {
-        return webClient.get()
+        return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/hotel/getAllHotelsBasedOnTheCountry")
                         .queryParam("countryId", country.getId())

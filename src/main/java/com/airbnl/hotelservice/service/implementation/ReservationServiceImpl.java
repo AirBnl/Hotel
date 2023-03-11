@@ -13,15 +13,15 @@ import java.util.List;
 @Service
 public class ReservationServiceImpl implements IReservationService {
 
-    private final WebClient webClient;
+    private final WebClient databaseWebClient;
 
     public ReservationServiceImpl(WebClient databaseWebClient) {
-        this.webClient = databaseWebClient;
+        this.databaseWebClient = databaseWebClient;
     }
 
     @Override
     public List<Reservation> getRoomReservationsByUserId(long userId) {
-        return webClient.get()
+        return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/reservation/getRoomReservationsByUserId")
                         .queryParam("userId", userId)
@@ -35,7 +35,7 @@ public class ReservationServiceImpl implements IReservationService {
 
     @Override
     public Reservation makeReservation(Reservation reservation) {
-        return webClient.post()
+        return databaseWebClient.post()
                 .uri("/reservation/save")
                 .accept(MediaType.APPLICATION_JSON)
                 .body(Mono.just(reservation), Reservation.class)

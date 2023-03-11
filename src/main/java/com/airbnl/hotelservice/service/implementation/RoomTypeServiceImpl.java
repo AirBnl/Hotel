@@ -11,15 +11,15 @@ import java.util.List;
 
 @Service
 public class RoomTypeServiceImpl implements IRoomTypeService {
-    private final WebClient webClient;
+    private final WebClient databaseWebClient;
 
-    public RoomTypeServiceImpl(WebClient webClient) {
-        this.webClient = webClient;
+    public RoomTypeServiceImpl(WebClient databaseWebClient) {
+        this.databaseWebClient = databaseWebClient;
     }
 
     @Override
     public List<RoomType> getAllRoomTypes() {
-        return webClient.get()
+        return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/roomType/getAllRoomTypes")
                         .build())
@@ -32,7 +32,7 @@ public class RoomTypeServiceImpl implements IRoomTypeService {
 
     @Override
     public List<RoomType> getAllRoomTypesByHotelID(long hotelId) {
-        return webClient.get()
+        return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/roomType/getAllRoomTypesByHotelID")
                         .queryParam("hotelId", hotelId)
@@ -46,7 +46,7 @@ public class RoomTypeServiceImpl implements IRoomTypeService {
 
     @Override
     public RoomType getRoomTypeById(long roomTypeId) {
-        return webClient.get()
+        return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/roomType/getRoomTypeById")
                         .queryParam("roomTypeId", roomTypeId)

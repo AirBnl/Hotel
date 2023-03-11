@@ -7,10 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.result.view.RedirectView;
 
 @Controller
-@RequestMapping("/user")
 public class authController {
     private final IUserService userService;
 
@@ -18,31 +18,15 @@ public class authController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/login")
-    public String login(Model model) {
-        return "login";
-    }
-
-    @GetMapping(path = "/signup")
-    public String signup(Model model) {
+    @GetMapping("/signup")
+    public String signupForm() {
         return "signup";
     }
 
-    @PostMapping(path = "/login")
-    public RedirectView login(User user) {
-        User userFromDb = userService.getByUserName(user.getUsername());
-        if(userFromDb == null)
-            return new RedirectView("/user/login");
-
-        return new RedirectView("/");
-    }
-
-    @PostMapping(path = "/signup")
-    public RedirectView signup(User user) {
-        userService.save(user);
-        long managerId = userService.getByUserName(user.getUsername()).getId();
-
-        return new RedirectView("/");
+    @PostMapping("/signup")
+    public String signupSubmit(@RequestParam("username") String username, @RequestParam("password") String password) {
+        userService.save(new User(-1, username, password, username, 2));
+        return "redirect:/login";
     }
 
 }
