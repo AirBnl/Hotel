@@ -12,10 +12,15 @@ public class AppConfig {
 
     @Value("${services.database.controller}")
     private String databaseController;
+    @Value("${services.auth.controller}")
+    private String authController;
 
     @Bean
     public WebClient databaseWebClient(WebClient.Builder webClient) {
         return webClient.baseUrl(databaseController).build();
     }
-
+    @Bean
+    WebClient authWebClient(WebClient.Builder webclient){
+        return webclient.baseUrl(authController).build();
+    }
 }

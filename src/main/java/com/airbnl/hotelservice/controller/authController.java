@@ -30,10 +30,11 @@ public class authController {
 
     @PostMapping(path = "/login")
     public RedirectView login(User user) {
-        User managerFromDb = userService.getByUserName(user.getUsername());
-        if (managerFromDb == null) return new RedirectView("/hotels/AllByManagerID/" + managerFromDb.getId());
+        User userFromDb = userService.getByUserName(user.getUsername());
+        if(userFromDb == null)
+            return new RedirectView("/user/login");
 
-        return new RedirectView("/user/login");
+        return new RedirectView("/");
     }
 
     @PostMapping(path = "/signup")
@@ -41,7 +42,7 @@ public class authController {
         userService.save(user);
         long managerId = userService.getByUserName(user.getUsername()).getId();
 
-        return new RedirectView("/hotels/AllByManagerID/" + managerId);
+        return new RedirectView("/");
     }
 
 }
