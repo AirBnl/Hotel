@@ -34,7 +34,7 @@ public class RoomTypeServiceImpl implements IRoomTypeService {
     public List<RoomType> getAllRoomTypesByHotelID(int hotelId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/roomType/getAllRoomTypesByCountryID")
+                        .path("/roomType/getAllRoomTypesByHotelID")
                         .queryParam("hotelId", hotelId)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)

@@ -23,7 +23,7 @@ public class HotelServiceImpl implements IHotelService {
     public List<Hotel> getAllHotels() {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/hotel/byCountryId")
+                        .path("/hotel/getAllHotels")
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
@@ -40,7 +40,7 @@ public class HotelServiceImpl implements IHotelService {
     private List<Hotel> getHotels(Country country) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/hotel/byCountryId")
+                        .path("/hotel/getAllHotelsBasedOnTheCountry")
                         .queryParam("countryId", country.getId())
                         .build())
                 .accept(MediaType.APPLICATION_JSON)

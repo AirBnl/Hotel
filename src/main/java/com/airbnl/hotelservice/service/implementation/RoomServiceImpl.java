@@ -27,7 +27,7 @@ public class RoomServiceImpl implements IRoomService {
     public List<Room> getRoomsByCountryAndRoomTypeIds(int countryId, int roomTypeId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/room/byHotelId")
+                        .path("/room/getRoomsByCountryAndRoomTypeIds")
                         .queryParam("countryId", countryId)
                         .queryParam("roomTypeId", roomTypeId)
                         .build())
@@ -41,7 +41,7 @@ public class RoomServiceImpl implements IRoomService {
     private List<Room> getRooms(Hotel hotel) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/room/byHotelId")
+                        .path("/room/getRoomsByHotelId")
                         .queryParam("hotelId", hotel.getId())
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
