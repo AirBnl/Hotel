@@ -22,7 +22,7 @@ public class HotelController {
     private final IRoomTypeService roomTypeService;
     private final IRoomService roomService;
     private final IReservationService reservationService;
-    public static int userId = 1;
+    public static long userId = 1;
 
     public HotelController(ICountryService countryService, IRoomTypeService roomTypeService, IRoomService roomService, IReservationService reservationService) {
         this.countryService = countryService;
@@ -41,7 +41,7 @@ public class HotelController {
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam("countryId") int countryId, @RequestParam("roomTypeId") int roomTypeId, Model model) {
+    public String search(@RequestParam("countryId") long countryId, @RequestParam("roomTypeId") long roomTypeId, Model model) {
         List<Room> rooms = roomService.getRoomsByCountryAndRoomTypeIds(countryId, roomTypeId);
         model.addAttribute("rooms", rooms);
 
@@ -49,7 +49,7 @@ public class HotelController {
     }
 
     @PostMapping("/reserve")
-    public String reserve(@RequestParam("roomId") int roomId, @RequestParam("roomTypeId") int roomTypeId, Model model) {
+    public String reserve(@RequestParam("roomId") long roomId, @RequestParam("roomTypeId") long roomTypeId, Model model) {
         RoomType roomType = roomTypeService.getRoomTypeById(roomTypeId);
         Reservation reservation = reservationService.makeReservation(new Reservation(-1, userId, roomId, roomType.getPrice(), null, null));
 

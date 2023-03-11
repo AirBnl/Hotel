@@ -13,9 +13,11 @@ import org.springframework.web.reactive.result.view.RedirectView;
 @RequestMapping("/user")
 public class authController {
     private final IUserService userService;
-    public authController(IUserService userService){
+
+    public authController(IUserService userService) {
         this.userService = userService;
     }
+
     @GetMapping(path = "/login")
     public String login(Model model) {
         return "login";
@@ -25,19 +27,19 @@ public class authController {
     public String signup(Model model) {
         return "signup";
     }
+
     @PostMapping(path = "/login")
-    public RedirectView  login(User user) {
+    public RedirectView login(User user) {
         User managerFromDb = userService.getByUserName(user.getUsername());
-        if(managerFromDb == null)
-            return new RedirectView("/hotels/AllByManagerID/" + managerFromDb.getId());
+        if (managerFromDb == null) return new RedirectView("/hotels/AllByManagerID/" + managerFromDb.getId());
 
         return new RedirectView("/user/login");
     }
 
     @PostMapping(path = "/signup")
-    public RedirectView  signup(User user) {
+    public RedirectView signup(User user) {
         userService.save(user);
-        int managerId = userService.getByUserName(user.getUsername()).getId();
+        long managerId = userService.getByUserName(user.getUsername()).getId();
 
         return new RedirectView("/hotels/AllByManagerID/" + managerId);
     }

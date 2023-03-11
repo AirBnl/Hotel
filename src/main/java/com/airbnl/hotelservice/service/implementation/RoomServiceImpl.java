@@ -24,7 +24,7 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public List<Room> getRoomsByCountryAndRoomTypeIds(int countryId, int roomTypeId) {
+    public List<Room> getRoomsByCountryAndRoomTypeIds(long countryId, long roomTypeId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/room/getRoomsByCountryAndRoomTypeIds")

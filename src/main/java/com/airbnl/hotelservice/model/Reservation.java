@@ -10,9 +10,9 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 public class Reservation {
-    private int id;
-    private int userId;
-    private int roomId;
+    private long id;
+    private long userId;
+    private long roomId;
     private double cost;
     private Timestamp dateFrom;
     private Timestamp dateTo;

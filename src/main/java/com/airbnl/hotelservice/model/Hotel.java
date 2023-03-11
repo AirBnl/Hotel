@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Hotel {
-    private int id;
+    private long id;
     private String name;
-    private int managerId;
-    private int countryId;
+    private long managerId;
+    private long countryId;
 }

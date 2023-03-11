@@ -20,7 +20,7 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     @Override
-    public List<Reservation> getRoomReservationsByUserId(int userId) {
+    public List<Reservation> getRoomReservationsByUserId(long userId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/reservation/getRoomReservationsByUserId")

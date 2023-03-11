@@ -7,7 +7,7 @@ import java.util.List;
 public interface IRoomTypeService {
     List<RoomType> getAllRoomTypes();
 
-    List<RoomType> getAllRoomTypesByHotelID(int hotelId);
+    List<RoomType> getAllRoomTypesByHotelID(long hotelId);
 
-    RoomType getRoomTypeById(int roomTypeId);
+    RoomType getRoomTypeById(long roomTypeId);
 }

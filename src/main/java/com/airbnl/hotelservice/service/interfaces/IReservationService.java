@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface IReservationService {
 
-    List<Reservation> getRoomReservationsByUserId(int userId);
+    List<Reservation> getRoomReservationsByUserId(long userId);
+
     Reservation makeReservation(Reservation reservation);
 }

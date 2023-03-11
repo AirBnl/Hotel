@@ -31,7 +31,7 @@ public class RoomTypeServiceImpl implements IRoomTypeService {
     }
 
     @Override
-    public List<RoomType> getAllRoomTypesByHotelID(int hotelId) {
+    public List<RoomType> getAllRoomTypesByHotelID(long hotelId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/roomType/getAllRoomTypesByHotelID")
@@ -45,7 +45,7 @@ public class RoomTypeServiceImpl implements IRoomTypeService {
     }
 
     @Override
-    public RoomType getRoomTypeById(int roomTypeId) {
+    public RoomType getRoomTypeById(long roomTypeId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/roomType/getRoomTypeById")
