@@ -37,6 +37,19 @@ public class HotelServiceImpl implements IHotelService {
         return getHotels(country);
     }
 
+    @Override
+    public Hotel getHotelById(long hotelId) {
+        return databaseWebClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/hotel/getHotelById")
+                        .queryParam("hotelId", hotelId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Hotel.class)
+                .block();
+    }
+
     private List<Hotel> getHotels(Country country) {
         return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder

@@ -9,4 +9,6 @@ public interface IHotelService {
     List<Hotel> getAllHotels();
 
     List<Hotel> getAllHotelsBasedOnTheCountry(Country country);
+
+    Hotel getHotelById(long hotelId);
 }

@@ -30,5 +30,18 @@ public class CountryServiceImpl implements ICountryService {
                 })
                 .block();
     }
+
+    @Override
+    public Country getCountryById(long countryId) {
+        return databaseWebClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/country/getCountryById")
+                        .queryParam("countryId", countryId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Country.class)
+                .block();
+    }
 }
 

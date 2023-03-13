@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ICountryService {
     List<Country> getAllCountries();
+    Country getCountryById(long id);
 }

@@ -23,7 +23,7 @@ public class ReservationServiceImpl implements IReservationService {
     public List<Reservation> getRoomReservationsByUserId(long userId) {
         return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/reservation/getRoomReservationsByUserId")
+                        .path("/Reservation/getRoomReservationsByUserId")
                         .queryParam("userId", userId)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
@@ -36,7 +36,7 @@ public class ReservationServiceImpl implements IReservationService {
     @Override
     public Reservation makeReservation(Reservation reservation) {
         return databaseWebClient.post()
-                .uri("/reservation/save")
+                .uri("/Reservation/save")
                 .accept(MediaType.APPLICATION_JSON)
                 .body(Mono.just(reservation), Reservation.class)
                 .retrieve()

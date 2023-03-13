@@ -38,6 +38,19 @@ public class RoomServiceImpl implements IRoomService {
                 .block();
     }
 
+    @Override
+    public Room getRoomById(long roomId) {
+        return databaseWebClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/room/getById")
+                        .queryParam("roomId", roomId)
+                        .build())
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(Room.class)
+                .block();
+    }
+
     private List<Room> getRooms(Hotel hotel) {
         return databaseWebClient.get()
                 .uri(uriBuilder -> uriBuilder
